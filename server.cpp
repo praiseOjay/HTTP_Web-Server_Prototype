@@ -29,6 +29,7 @@ private:
     tcp::acceptor acceptor_;
 
     void handleRequest(tcp::socket& socket) {
+    try {
         boost::system::error_code error;
         boost::asio::streambuf request;
         read_until(socket, request, "\r\n\r\n", error);
@@ -50,18 +51,28 @@ private:
                 read_post_data(request_stream, post_data);
                 handlePostRequest(socket, post_data);
             }
+        } else {
+            throw std::runtime_error("Error reading request: " + error.message());
         }
+    } catch (const std::exception& e) {
+        std::cerr << "Error handling request: " << e.what() << std::endl;
     }
+}
 
     void handleGetRequest(tcp::socket& socket, const std::string& file_path) {
+    try {
         std::string file_content = readFile(file_path);
         std::string response_headers = generateResponseHeaders(file_path);
         write(socket, buffer(response_headers));
         write(socket, buffer(file_content));
         std::cout << response_headers << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error handling GET request: " << e.what() << std::endl;
     }
+}
 
     void read_post_data(std::istream& request_stream, std::string& post_data) {
+    try {
         std::stringstream ss;
         ss << request_stream.rdbuf();  // Read the entire request body into a stringstream
         std::string request_body = ss.str();
@@ -77,8 +88,13 @@ private:
 
             // Save the title and content values to the post_data string
             post_data = "Title: " + title_value + "\nContent: " + content_value;
+        } else {
+            throw std::runtime_error("Title or content not found in the request body");
         }
+    } catch (const std::exception& e) {
+        std::cerr << "Error reading post data: " << e.what() << std::endl;
     }
+}
 
     std::string extract_field_value(const std::string& request_body, size_t field_pos) {
         size_t value_start = request_body.find_first_of("=", field_pos) + 1;
