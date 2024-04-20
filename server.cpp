@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <boost/asio.hpp>
+#include <memory>
 
 using namespace boost::asio;
 using ip::tcp;
@@ -16,10 +17,10 @@ public:
 
     void run() {
         while (true) {
-            tcp::socket socket(io_);
-            acceptor_.accept(socket);
+            std::unique_ptr<tcp::socket> socket = std::make_unique<tcp::socket>(io_);
+            acceptor_.accept(*socket);
 
-            handleRequest(socket);
+            handleRequest(*socket);
         }
     }
 
@@ -53,87 +54,85 @@ private:
     }
 
     void handleGetRequest(tcp::socket& socket, const std::string& file_path) {
-    std::string file_content = readFile(file_path);
-    std::string response_headers = generateResponseHeaders(file_path);
-    write(socket, buffer(response_headers));
-    write(socket, buffer(file_content));
-    std::cout << response_headers << std::endl;
+        std::string file_content = readFile(file_path);
+        std::string response_headers = generateResponseHeaders(file_path);
+        write(socket, buffer(response_headers));
+        write(socket, buffer(file_content));
+        std::cout << response_headers << std::endl;
     }
 
     void read_post_data(std::istream& request_stream, std::string& post_data) {
-    std::stringstream ss;
-    ss << request_stream.rdbuf();  // Read the entire request body into a stringstream
-    std::string request_body = ss.str();
+        std::stringstream ss;
+        ss << request_stream.rdbuf();  // Read the entire request body into a stringstream
+        std::string request_body = ss.str();
 
-    // Find the position of the title and content data in the request body
-    size_t title_pos = request_body.find("title=");
-    size_t content_pos = request_body.find("content=");
+        // Find the position of the title and content data in the request body
+        size_t title_pos = request_body.find("title=");
+        size_t content_pos = request_body.find("content=");
 
-    if (title_pos != std::string::npos && content_pos != std::string::npos) {
-        // Extract the title and content values from the request body
-        std::string title_value = extract_field_value(request_body, title_pos);
-        std::string content_value = extract_field_value(request_body, content_pos);
+        if (title_pos != std::string::npos && content_pos != std::string::npos) {
+            // Extract the title and content values from the request body
+            std::string title_value = extract_field_value(request_body, title_pos);
+            std::string content_value = extract_field_value(request_body, content_pos);
 
-        // Save the title and content values to the post_data string
-        post_data = "Title: " + title_value + "\nContent: " + content_value;
+            // Save the title and content values to the post_data string
+            post_data = "Title: " + title_value + "\nContent: " + content_value;
+        }
     }
-}
 
+    std::string extract_field_value(const std::string& request_body, size_t field_pos) {
+        size_t value_start = request_body.find_first_of("=", field_pos) + 1;
+        size_t value_end = request_body.find_first_of("&", value_start);
+        if (value_end == std::string::npos) {
+            value_end = request_body.size();
+        }
+        std::string value = request_body.substr(value_start, value_end - value_start);
 
-std::string extract_field_value(const std::string& request_body, size_t field_pos) {
-    size_t value_start = request_body.find_first_of("=", field_pos) + 1;
-    size_t value_end = request_body.find_first_of("&", value_start);
-    if (value_end == std::string::npos) {
-        value_end = request_body.size();
+        // URL decode the value
+        value = url_decode(value);
+
+        return value;
     }
-    std::string value = request_body.substr(value_start, value_end - value_start);
-    
-    // URL decode the value
-    value = url_decode(value);
-    
-    return value;
-}
 
-std::string url_decode(const std::string& str) {
-    std::stringstream decoded;
-    std::string::const_iterator it = str.begin();
-    while (it != str.end()) {
-        if (*it == '%') {
-            if (it + 3 <= str.end()) {
-                int value = 0;
-                std::istringstream is(std::string(it + 1, it + 3));
-                is >> std::hex >> value;
-                decoded << static_cast<char>(value);
-                it += 3;
+    std::string url_decode(const std::string& str) {
+        std::stringstream decoded;
+        std::string::const_iterator it = str.begin();
+        while (it != str.end()) {
+            if (*it == '%') {
+                if (it + 3 <= str.end()) {
+                    int value = 0;
+                    std::istringstream is(std::string(it + 1, it + 3));
+                    is >> std::hex >> value;
+                    decoded << static_cast<char>(value);
+                    it += 3;
+                } else {
+                    decoded << *it;
+                }
+            } else if (*it == '+') {
+                decoded << ' ';
             } else {
                 decoded << *it;
             }
-        } else if (*it == '+') {
-            decoded << ' ';
-        } else {
-            decoded << *it;
+            it++;
         }
-        it++;
+        return decoded.str();
     }
-    return decoded.str();
-}
 
     std::string generateResponseHeaders(const std::string& file_path) {
-    std::string content_type = "text/plain"; // Default content type
-    if (file_path.find(".html") != std::string::npos) {
-        content_type = "text/html";
-    } else if (file_path.find(".css") != std::string::npos) {
-        content_type = "text/css";
-    } else if (file_path.find(".js") != std::string::npos) {
-        content_type = "application/javascript";
-    }
+        std::string content_type = "text/plain"; // Default content type
+        if (file_path.find(".html") != std::string::npos) {
+            content_type = "text/html";
+        } else if (file_path.find(".css") != std::string::npos) {
+            content_type = "text/css";
+        } else if (file_path.find(".js") != std::string::npos) {
+            content_type = "application/javascript";
+        }
 
-    std::ostringstream headers;
-    headers << "HTTP/1.1 200 OK\r\n";
-    headers << "Content-Type: " << content_type << "\r\n";
-    headers << "Connection: close\r\n\r\n";
-
-    return headers.str();
+        std::ostringstream headers;
+        headers << "HTTP/1.1 200 OK\r\n";
+        headers << "Content-Type: " << content_type << "\r\n";
+        headers << "Connection: close\r\n\r\n";
+        return headers.str();
     }
 
     std::string readFile(const std::string& file_path) {
