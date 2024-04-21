@@ -1,0 +1,77 @@
+[2024-04-21 20:10:11.398] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 20:10:11.398] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 20:10:11.398] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 20:10:11.398] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 22:55:43.163] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 22:55:48.035] [http_server_logger] [info] Handling GET request for file: src/index.html
+[2024-04-21 22:55:48.037] [http_server_logger] [info] Generating response header for file: src/index.html
+[2024-04-21 22:55:43.163] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 22:55:48.073] [http_server_logger] [info] Handling GET request for file: favicon.ico
+[2024-04-21 22:55:48.074] [http_server_logger] [info] Generating response header for file: favicon.ico
+[2024-04-21 22:55:43.163] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 22:56:10.183] [http_server_logger] [info] Reading POST data: 
+[2024-04-21 22:56:10.183] [http_server_logger] [info] Extracting field value...
+[2024-04-21 22:56:10.183] [http_server_logger] [info] Decoding url encoded values: server+test
+[2024-04-21 22:56:10.183] [http_server_logger] [info] Extracting field value...
+[2024-04-21 22:56:10.183] [http_server_logger] [info] Decoding url encoded values: this+is+a+test
+[2024-04-21 22:55:43.163] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 22:56:10.210] [http_server_logger] [info] Handling GET request for file: favicon.ico
+[2024-04-21 22:56:10.213] [http_server_logger] [info] Generating response header for file: favicon.ico
+[2024-04-21 22:58:10.009] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 22:58:14.839] [http_server_logger] [info] Handling GET request for file: favicon.ico
+[2024-04-21 22:58:14.839] [http_server_logger] [info] Generating response header for file: favicon.ico
+[2024-04-21 23:07:56.810] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 23:08:01.722] [http_server_logger] [info] Reading POST data: 
+[2024-04-21 23:08:01.722] [http_server_logger] [info] Extracting field value...
+[2024-04-21 23:08:01.722] [http_server_logger] [info] Decoding url encoded values: server+test
+[2024-04-21 23:08:01.722] [http_server_logger] [info] decoded: server test
+[2024-04-21 23:08:01.722] [http_server_logger] [info] Value: server test
+[2024-04-21 23:08:01.722] [http_server_logger] [info] Extracting field value...
+[2024-04-21 23:08:01.722] [http_server_logger] [info] Decoding url encoded values: this+is+a+test
+[2024-04-21 23:08:01.722] [http_server_logger] [info] decoded: this is a test
+[2024-04-21 23:08:01.722] [http_server_logger] [info] Value: this is a test
+[2024-04-21 23:08:01.722] [http_server_logger] [info] Handling POST request: Title: server test
+Content: this is a test
+[2024-04-21 23:08:01.728] [http_server_logger] [info] response: HTTP/1.1 200 OK
+Content-Type: text/plain
+Content-Length: 42
+Connection: close
+
+Data saved successfully
+
+[2024-04-21 23:07:56.810] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 23:08:01.765] [http_server_logger] [info] Handling GET request for file: favicon.ico
+[2024-04-21 23:08:01.766] [http_server_logger] [error] 404 File Not Found
+[2024-04-21 23:08:01.766] [http_server_logger] [info] Generating response header for file: favicon.ico
+[2024-04-21 23:08:01.766] [http_server_logger] [info] headers: HTTP/1.1 200 OK
+Content-Type: text/plain
+Connection: close
+
+
+[2024-04-21 23:07:56.810] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 23:08:05.783] [http_server_logger] [info] Handling GET request for file: favicon.ico
+[2024-04-21 23:08:05.784] [http_server_logger] [error] 404 File Not Found
+[2024-04-21 23:08:05.784] [http_server_logger] [info] Generating response header for file: favicon.ico
+[2024-04-21 23:08:05.784] [http_server_logger] [info] headers: HTTP/1.1 200 OK
+Content-Type: text/plain
+Connection: close
+
+
+[2024-04-21 23:07:56.810] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 23:08:10.020] [http_server_logger] [info] Handling GET request for file: src/index.htm
+[2024-04-21 23:08:10.021] [http_server_logger] [error] 404 File Not Found
+[2024-04-21 23:08:10.021] [http_server_logger] [info] Generating response header for file: src/index.htm
+[2024-04-21 23:08:10.021] [http_server_logger] [info] headers: HTTP/1.1 200 OK
+Content-Type: text/plain
+Connection: close
+
+
+[2024-04-21 23:07:56.810] [http_server_logger] [info] Server started on port 8080
+[2024-04-21 23:08:10.086] [http_server_logger] [info] Handling GET request for file: favicon.ico
+[2024-04-21 23:08:10.087] [http_server_logger] [error] 404 File Not Found
+[2024-04-21 23:08:10.087] [http_server_logger] [info] Generating response header for file: favicon.ico
+[2024-04-21 23:08:10.087] [http_server_logger] [info] headers: HTTP/1.1 200 OK
+Content-Type: text/plain
+Connection: close
+
+
