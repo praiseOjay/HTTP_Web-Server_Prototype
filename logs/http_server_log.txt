@@ -75,3 +75,60 @@ Content-Type: text/plain
 Connection: close
 
 
+[2024-04-23 01:13:00.409] [http_server_logger] [info] Server started on port 8080
+[2024-04-23 01:13:06.354] [http_server_logger] [info] Handling GET request for file: src/sample.txt
+[2024-04-23 01:13:06.369] [http_server_logger] [info] oss: Scenario:You work for SalforSec Soft (SSS) Ltd., a company that wants to provide security solutions to itspotential customers. You have been employed as a fresh Secure Software-trained Master’sgraduate to write secure code, with your first job to design and prototype a secure web server.(a) Write (prototype) a secure web server server using using C++, Java, or Rust to serve webpages to clients over the http protocol. The code you develop must compile compile on Linuxand in particular must compile on the provided Fedora Linux VM image, with the include gcc orclang / llvm compiler.In development of the software, it is expected that you use a Version Control System such as gitand appropriate software development techniques.You are expected to document your source code inline as you progress so that your peers at SSSmay easily review it.In designing and constructing the server, you must take into consideration security, andspecifically the security features listed below. Consider a holistic security approach that can beAssessment Information/Brief2
+DRAFTimplemented. The specific functionalities required are also given below.A working server comprises 50% of this assignment’s marks.(b) Write a technical report on the design and implementation, with a focus on the securitymeasures you have taken. The level of the report is aimed at your experienced Master’sgraduate colleagues at SSS who have a number of years working in software development andtesting, so mundane Computer Science things to not need to be explained, however you areconsidered the expert on security measures introduced into the web server, and these need beexplained – the what, how, and why.Include annotated snippets of code in which you have taken specific security measures, and usediagrams where useful to demonstrate your understanding of the security aspects, tying themin with specific security principles encountered in US-CERT BSI (Build Security In) andelsewhere.Give reasoning for security measures that could be taken to secure your web server. Brieflycover any additional security measures that could be taken to secure your web server, even ifout of reach of your capability, to improve the overall security of your server.The structure of the report is open to the student. Keep it well-formatted and structured, witha title, contents page, an introduction and body (to be divided as necessary), with a finalconclusion, followed by references. Keep it concise. Have an Appendix if necessary. TheAppendix will not be marked but may contain information supporting the body of the reportwhere it cannot be included as a normal reference.
+[2024-04-23 01:13:06.369] [http_server_logger] [info] Generating response header for file: src/sample.txt
+[2024-04-23 01:13:06.369] [http_server_logger] [info] headers: HTTP/1.1 200 OK
+Content-Type: text/plain
+Connection: close
+
+
+[2024-04-23 01:13:00.409] [http_server_logger] [info] Server started on port 8080
+[2024-04-23 01:13:06.453] [http_server_logger] [info] Handling GET request for file: favicon.ico
+[2024-04-23 01:13:06.454] [http_server_logger] [error] 404 File Not Found
+[2024-04-23 01:13:06.454] [http_server_logger] [info] Generating response header for file: favicon.ico
+[2024-04-23 01:13:06.454] [http_server_logger] [info] headers: HTTP/1.1 200 OK
+Content-Type: text/plain
+Connection: close
+
+
+[2024-04-23 01:13:00.409] [http_server_logger] [info] Server started on port 8080
+[2024-04-23 01:13:26.803] [http_server_logger] [info] Handling GET request for file: src/index.html
+[2024-04-23 01:13:26.811] [http_server_logger] [info] oss: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Submission Form</title>
+</head>
+<body>
+    <h1>Post Submission Form</h1>
+    <form action="/submit-post" method="post">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title"><br><br>
+        
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content" rows="4" cols="50"></textarea><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+[2024-04-23 01:13:26.811] [http_server_logger] [info] Generating response header for file: src/index.html
+[2024-04-23 01:13:26.811] [http_server_logger] [info] headers: HTTP/1.1 200 OK
+Content-Type: text/html
+Connection: close
+
+
+[2024-04-23 01:13:00.409] [http_server_logger] [info] Server started on port 8080
+[2024-04-23 01:13:26.870] [http_server_logger] [info] Handling GET request for file: favicon.ico
+[2024-04-23 01:13:26.870] [http_server_logger] [error] 404 File Not Found
+[2024-04-23 01:13:26.870] [http_server_logger] [info] Generating response header for file: favicon.ico
+[2024-04-23 01:13:26.870] [http_server_logger] [info] headers: HTTP/1.1 200 OK
+Content-Type: text/plain
+Connection: close
+
+
